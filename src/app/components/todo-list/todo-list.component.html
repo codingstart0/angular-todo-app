@@ -1,1 +1,7 @@
-<p>todo-list works!</p>
+<h2>Todo List</h2>
+<ul>
+  <li *ngFor="let todo of todos">
+    {{ todo.title }} - {{ todo.completed ? '✅' : '❌' }}
+  </li>
+</ul>
+
