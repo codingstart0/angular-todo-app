@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TodoService } from '../../services/todo.service';
 import { Todo } from '../../models/todo.model';
+import { FormGroup, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-todo-list',
@@ -9,12 +10,29 @@ import { Todo } from '../../models/todo.model';
 })
 export class TodoListComponent implements OnInit {
   todos: Todo[] = [];
+  todoForm: FormGroup;
 
-  constructor(private todoService: TodoService) {}
+  constructor(private todoService: TodoService) {
+    this.todoForm = new FormGroup({
+      title: new FormControl(''),
+    });
+  }
 
   ngOnInit(): void {
     this.todoService.getTodos().subscribe((data) => {
       this.todos = data;
     });
+  }
+
+  addTodo(): void {
+    const newTodo = new Todo(
+      this.todos.length + 1,
+      this.todoForm.value.title,
+      false
+    );
+
+    this.todos.push(newTodo);
+
+    this.todoForm.reset();
   }
 }
