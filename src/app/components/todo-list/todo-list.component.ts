@@ -26,6 +26,7 @@ export class TodoListComponent implements OnInit {
 
   addTodo(): void {
     const newTodo = new Todo(
+      // TODO: generate id using UUID
       this.todos.length + 1,
       this.todoForm.value.title,
       false
