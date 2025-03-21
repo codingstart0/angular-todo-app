@@ -14,5 +14,10 @@ export class TodoService {
   getTodos(): Observable<Todo[]> {
     return this.http.get<Todo[]>(`${this.apiBaseUrl}/todos`);
   }
-  // TODO add other methods like post, patch, delete, 
+
+  addTodo(todo: Partial<Todo>): Observable<Todo> {
+    return this.http.post<Todo>(`${this.apiBaseUrl}/todos`, todo);
+  }
+  
+  // TODO add other methods like, patch, delete, 
 }

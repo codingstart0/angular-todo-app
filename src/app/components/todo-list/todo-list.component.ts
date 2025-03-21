@@ -23,17 +23,16 @@ export class TodoListComponent implements OnInit {
       this.todos = data;
     });
   }
-
   addTodo(): void {
-    const newTodo = new Todo(
-      // TODO: generate id using UUID
-      this.todos.length + 1,
-      this.todoForm.value.title,
-      false
-    );
+    const newTodo = {
+      title: this.todoForm.value.title,
+      completed: false,
+    };
 
-    this.todos.push(newTodo);
+    this.todoService.addTodo(newTodo).subscribe((savedTodo) => {
+      this.todos.push(savedTodo);
 
-    this.todoForm.reset();
+      this.todoForm.reset();
+    });
   }
 }
