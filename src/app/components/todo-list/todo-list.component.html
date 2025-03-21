@@ -1,4 +1,14 @@
 <h2>Todo List</h2>
+
+<form [formGroup]="todoForm" (ngSubmit)="addTodo()">
+<input
+formControlName="title"
+placeholder='Add a todo'
+required
+/>
+<button type='submit'>Add Todo</button>
+</form>
+
 <ul>
   <li *ngFor="let todo of todos">
     <mat-checkbox [(ngModel)]="todo.completed">

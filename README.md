@@ -1,3 +1,9 @@
+#TODO
+
+Reikia id gauti is serverio, kai ivestas todo po submito siunciamas i serveri kur laikomi todos, kaip duombazej. Ir tada ji suteikia id, prideda ivesta teksta ir sugeneruoja kaip objekta su duomenimis. Po to grazina ji atgal ir tada matome ji browseri kaip prideta todo i sarasa.
+
+Tai esme pradeti nuo POST metodo, kad jis tvarkingai siustu duomenis i serveri. O tada jau suksim galva del uuid.
+
 # AngularTodoApp
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.11.
