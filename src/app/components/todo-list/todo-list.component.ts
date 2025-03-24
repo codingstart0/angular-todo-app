@@ -24,7 +24,7 @@ export class TodoListComponent implements OnInit {
     });
   }
   addTodo(): void {
-    const newTodo = {
+    const newTodo: Omit<Todo, 'id'> = {
       title: this.todoForm.value.title,
       completed: false,
     };

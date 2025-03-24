@@ -5,7 +5,7 @@ export class Todo {
     public completed: boolean = false
   ) {}
 
-  toggleCompleted(): void {
+  toggleCompleted?(): void {
     this.completed = !this.completed;
   }
 }
