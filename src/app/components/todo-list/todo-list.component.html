@@ -5,9 +5,10 @@
   <button type="submit">Add Todo</button>
 </form>
 
+<!-- TODO move to todo-item -->
 <ul>
   <li *ngFor="let todo of todos">
-    <mat-checkbox [(ngModel)]="todo.completed">
+    <mat-checkbox (change)="toggleTodo(todo)" [checked]="todo.completed">
       {{ todo.title }}
     </mat-checkbox>
   </li>
