@@ -55,6 +55,7 @@ export class TodoItemComponent implements OnInit {
         })
         .subscribe((updateTodo) => {
           this.titleControl?.setValue(updateTodo.title);
+          this.isEditing = false;
         });
     }
   }
