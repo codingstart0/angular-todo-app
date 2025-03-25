@@ -1,6 +1,7 @@
-<li>
-  <mat-checkbox (change)="toggleTodo()" [checked]="todo.completed">
-    {{ todo.title }}
-  </mat-checkbox>
-</li>
-
+<mat-checkbox
+  *ngIf="completedControl"
+  [formControl]="completedControl"
+  (change)="toggleTodo()"
+>
+  {{ titleControl?.value }}
+</mat-checkbox>

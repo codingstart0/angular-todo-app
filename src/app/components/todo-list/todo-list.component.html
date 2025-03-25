@@ -1,11 +1,12 @@
 <h2>Todo List</h2>
 
-<form [formGroup]="todoForm" (ngSubmit)="addTodo()">
+<form [formGroup]="newTodoForm" (ngSubmit)="addTodo()">
   <input formControlName="title" placeholder="Add a todo" required />
   <button type="submit">Add Todo</button>
 </form>
 
-<div *ngFor="let todo of todos">
-  <app-todo-item [todo]="todo" (toggle)="toggleTodo($event)"></app-todo-item>
-</div>
-
+<form [formGroup]="todosFormGroup">
+  <div *ngFor="let todoItemFormGroup of todosFormArray.controls; index as i">
+    <app-todo-item [todoFormGroup]="todoItemFormGroup"></app-todo-item>
+  </div>
+</form>

@@ -19,10 +19,8 @@ export class TodoService {
     return this.http.post<Todo>(`${this.apiBaseUrl}/todos`, todo);
   }
 
-  toggleTodo(todo: Todo): Observable<Todo> {
-    return this.http.patch<Todo>(`${this.apiBaseUrl}/todos/${todo.id}`, {
-      completed: !todo.completed,
-    });
+  updateTodo(todo: Todo): Observable<Todo> {
+    return this.http.put<Todo>(`${this.apiBaseUrl}/todos/${todo.id}`, todo);
   }
 
   // TODO add other methods like, patch, delete,
