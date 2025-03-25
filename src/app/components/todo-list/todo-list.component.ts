@@ -35,7 +35,6 @@ export class TodoListComponent implements OnInit {
       this.todoForm.reset();
     });
   }
-
   toggleTodo(todo: Todo): void {
     this.todoService.toggleTodo(todo).subscribe((updatedTodo) => {
       todo.completed = updatedTodo.completed;

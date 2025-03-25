@@ -1,1 +1,6 @@
-<p>todo-item works!</p>
+<li>
+  <mat-checkbox (change)="toggleTodo()" [checked]="todo.completed">
+    {{ todo.title }}
+  </mat-checkbox>
+</li>
+
