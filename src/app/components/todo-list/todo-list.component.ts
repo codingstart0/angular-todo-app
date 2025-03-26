@@ -59,7 +59,7 @@ export class TodoListComponent implements OnInit {
     });
   }
 
-  removeTodo(id: number): void {
+  removeTodoFromFormArray(id: number): void {
     const index = this.todosFormArray.controls.findIndex(
       (todoFormGroup) => todoFormGroup.get('id')?.value === id
     );
@@ -69,7 +69,7 @@ export class TodoListComponent implements OnInit {
   }
 
   onDeleteTodo(id: number): void {
-    this.removeTodo(id);
+    this.removeTodoFromFormArray(id);
   }
 
   deleteAllCompleted(): void {
@@ -80,8 +80,8 @@ export class TodoListComponent implements OnInit {
     completedTodos.forEach((todoFormGroup) => {
       const id = todoFormGroup.get('id')?.value;
       if (id !== undefined) {
-        this.todoService.deleteTodo(id).subscribe(() => {
-          this.removeTodo(id);
+        this.todoService.removeTodo(id).subscribe(() => {
+          this.removeTodoFromFormArray(id);
         });
       }
     });

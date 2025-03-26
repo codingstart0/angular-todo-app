@@ -36,11 +36,6 @@ export class TodoItemComponent implements OnInit {
     this.completedControl = this.todoFormGroup?.get('completed') as FormControl;
   }
 
-  AfterViewInit(): void {
-    if (this.isEditing && this.titleInput) {
-      this.titleInput.nativeElement.select();
-    }
-  }
   toggleTodo(): void {
     if (this.idControl && this.titleControl && this.completedControl) {
       this.todoService
@@ -59,8 +54,9 @@ export class TodoItemComponent implements OnInit {
     if (!this.isEditing) {
       this.isEditing = true;
       setTimeout(() => {
-        if (this.titleInput) {
+        if (this.titleInput && this.titleInput.nativeElement) {
           this.titleInput.nativeElement.select();
+          this.titleInput.nativeElement.focus();
         }
       }, 0);
     }
@@ -68,7 +64,7 @@ export class TodoItemComponent implements OnInit {
 
   deleteTodo(): void {
     if (this.idControl) {
-      this.todoService.deleteTodo(this.idControl.value).subscribe(() => {
+      this.todoService.removeTodo(this.idControl.value).subscribe(() => {
         this.deleteTodoEvent.emit(this.idControl?.value);
       });
     }
