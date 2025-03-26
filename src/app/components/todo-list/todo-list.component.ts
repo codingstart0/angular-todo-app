@@ -71,4 +71,25 @@ export class TodoListComponent implements OnInit {
   onDeleteTodo(id: number): void {
     this.removeTodo(id);
   }
+
+  deleteAllCompleted(): void {
+    const completedTodos = this.todosFormArray.controls.filter(
+      (todoFormGroup) => todoFormGroup.get('completed')?.value === true
+    );
+
+    completedTodos.forEach((todoFormGroup) => {
+      const id = todoFormGroup.get('id')?.value;
+      if (id !== undefined) {
+        this.todoService.deleteTodo(id).subscribe(() => {
+          this.removeTodo(id);
+        });
+      }
+    });
+  }
+
+  hasCompletedTodos(): boolean {
+    return this.todosFormArray.controls.some(
+      (todoFormGroup) => todoFormGroup.get('completed')?.value === true
+    );
+  }
 }

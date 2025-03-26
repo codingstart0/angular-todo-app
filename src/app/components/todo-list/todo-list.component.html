@@ -13,3 +13,7 @@
     ></app-todo-item>
   </div>
 </form>
+
+<button *ngIf="hasCompletedTodos()" (click)="deleteAllCompleted()">
+  Delete Completed Todos
+</button>

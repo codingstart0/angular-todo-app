@@ -6,7 +6,6 @@ import {
   OnInit,
   ViewChild,
   ElementRef,
-  
 } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { TodoService } from '../../services/todo.service';
@@ -61,20 +60,11 @@ export class TodoItemComponent implements OnInit {
       this.isEditing = true;
       setTimeout(() => {
         if (this.titleInput) {
-          this.titleInput.nativeElement.select(); // Select all the text in the input when entering edit mode
+          this.titleInput.nativeElement.select();
         }
       }, 0);
     }
   }
-
-  // deleteTodo(): void {
-  //   if (this.idControl?.value !== undefined) {
-  //     this.todoService.deleteTodo(this.idControl.value).subscribe(() => {
-  //       this.deleteTodoEvent.emit(this.idControl.value); // Emit the ID to the parent
-  //     });
-  //   }
-  // }
-  
 
   deleteTodo(): void {
     if (this.idControl) {
