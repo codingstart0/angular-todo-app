@@ -58,4 +58,17 @@ export class TodoListComponent implements OnInit {
       this.newTodoForm.reset();
     });
   }
+
+  removeTodo(id: number): void {
+    const index = this.todosFormArray.controls.findIndex(
+      (todoFormGroup) => todoFormGroup.get('id')?.value === id
+    );
+    if (index !== -1) {
+      this.todosFormArray.removeAt(index);
+    }
+  }
+
+  onDeleteTodo(id: number): void {
+    this.removeTodo(id);
+  }
 }

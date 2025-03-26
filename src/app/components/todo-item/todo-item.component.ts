@@ -1,4 +1,13 @@
-import { Component, EventEmitter, Input, Output, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  OnInit,
+  ViewChild,
+  ElementRef,
+  
+} from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { TodoService } from '../../services/todo.service';
 
@@ -10,6 +19,7 @@ import { TodoService } from '../../services/todo.service';
 export class TodoItemComponent implements OnInit {
   @Input() todoFormGroup?: FormGroup;
   @Output() edit = new EventEmitter<void>();
+  @Output() deleteTodoEvent = new EventEmitter<number>();
 
   idControl?: FormControl<number>;
   titleControl?: FormControl<string>;
@@ -29,7 +39,7 @@ export class TodoItemComponent implements OnInit {
 
   AfterViewInit(): void {
     if (this.isEditing && this.titleInput) {
-      this.titleInput.nativeElement.select(); // Select all the text in the input when entering edit mode
+      this.titleInput.nativeElement.select();
     }
   }
   toggleTodo(): void {
@@ -56,7 +66,23 @@ export class TodoItemComponent implements OnInit {
       }, 0);
     }
   }
+
+  // deleteTodo(): void {
+  //   if (this.idControl?.value !== undefined) {
+  //     this.todoService.deleteTodo(this.idControl.value).subscribe(() => {
+  //       this.deleteTodoEvent.emit(this.idControl.value); // Emit the ID to the parent
+  //     });
+  //   }
+  // }
   
+
+  deleteTodo(): void {
+    if (this.idControl) {
+      this.todoService.deleteTodo(this.idControl.value).subscribe(() => {
+        this.deleteTodoEvent.emit(this.idControl?.value);
+      });
+    }
+  }
 
   saveEdit(): void {
     if (this.idControl && this.titleControl) {
@@ -71,6 +97,5 @@ export class TodoItemComponent implements OnInit {
           this.isEditing = false;
         });
     }
-    
   }
 }
