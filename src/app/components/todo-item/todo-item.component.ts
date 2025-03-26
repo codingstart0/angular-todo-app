@@ -37,11 +37,10 @@ export class TodoItemComponent implements OnInit {
   }
 
   toggleTodo(): void {
-    if (this.idControl && this.titleControl && this.completedControl) {
+    if (this.idControl && this.completedControl) {
       this.todoService
         .updateTodo({
           id: this.idControl.value,
-          title: this.titleControl.value,
           completed: this.completedControl.value,
         })
         .subscribe((updateTodo) => {
@@ -76,7 +75,6 @@ export class TodoItemComponent implements OnInit {
         .updateTodo({
           id: this.idControl.value,
           title: this.titleControl.value,
-          completed: this.completedControl?.value ?? false,
         })
         .subscribe((updateTodo) => {
           this.titleControl?.setValue(updateTodo.title);
