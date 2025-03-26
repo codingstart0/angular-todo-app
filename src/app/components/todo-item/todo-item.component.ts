@@ -1,5 +1,5 @@
-import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
-import { FormGroup, FormControl, FormArray } from '@angular/forms';
+import { Component, EventEmitter, Input, Output, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { FormGroup, FormControl } from '@angular/forms';
 import { TodoService } from '../../services/todo.service';
 
 @Component({
@@ -17,12 +17,20 @@ export class TodoItemComponent implements OnInit {
 
   isEditing = false;
 
+  @ViewChild('titleInput') titleInput?: ElementRef;
+
   constructor(private todoService: TodoService) {}
 
   ngOnInit(): void {
     this.idControl = this.todoFormGroup?.get('id') as FormControl;
     this.titleControl = this.todoFormGroup?.get('title') as FormControl;
     this.completedControl = this.todoFormGroup?.get('completed') as FormControl;
+  }
+
+  AfterViewInit(): void {
+    if (this.isEditing && this.titleInput) {
+      this.titleInput.nativeElement.select(); // Select all the text in the input when entering edit mode
+    }
   }
   toggleTodo(): void {
     if (this.idControl && this.titleControl && this.completedControl) {
@@ -41,6 +49,11 @@ export class TodoItemComponent implements OnInit {
   editTodo(): void {
     if (!this.isEditing) {
       this.isEditing = true;
+      setTimeout(() => {
+        if (this.titleInput) {
+          this.titleInput.nativeElement.select(); // Select all the text in the input when entering edit mode
+        }
+      }, 0);
     }
   }
   
@@ -58,5 +71,6 @@ export class TodoItemComponent implements OnInit {
           this.isEditing = false;
         });
     }
+    
   }
 }
