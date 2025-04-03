@@ -23,7 +23,7 @@ export class TodoListComponent implements OnInit {
       this.todos = data;
     });
   }
-  addTodo() {
+  addTodo(): void {
     const newTodo: Omit<Todo, 'id'> = {
       title: this.todoForm.value.title,
       completed: false,
@@ -31,10 +31,8 @@ export class TodoListComponent implements OnInit {
 
     this.todoService.addTodo(newTodo).subscribe((savedTodo) => {
       this.todos.push(savedTodo);
-
       this.todoForm.reset();
     });
-    return 'ts';
   }
 
   toggleTodo(todo: Todo): void {
