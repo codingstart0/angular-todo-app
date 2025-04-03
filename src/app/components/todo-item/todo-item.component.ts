@@ -10,6 +10,8 @@ import {
 import { FormGroup, FormControl } from '@angular/forms';
 import { TodoService } from '../../services/todo.service';
 
+let unusedVar;
+
 @Component({
   selector: 'app-todo-item',
   templateUrl: './todo-item.component.html',
@@ -35,7 +37,6 @@ export class TodoItemComponent implements OnInit {
     this.titleControl = this.todoFormGroup?.get('title') as FormControl;
     this.completedControl = this.todoFormGroup?.get('completed') as FormControl;
   }
-
   toggleTodo(): void {
     if (this.idControl && this.completedControl) {
       this.todoService
@@ -68,7 +69,6 @@ export class TodoItemComponent implements OnInit {
       });
     }
   }
-
   saveEdit(): void {
     if (this.idControl && this.titleControl) {
       this.todoService
