@@ -43,7 +43,7 @@ export class TodoListComponent implements OnInit {
         id: new FormControl(todo.id),
         title: new FormControl(todo.title),
         completed: new FormControl(todo.completed),
-      }),
+      })
     );
   }
 
@@ -61,7 +61,7 @@ export class TodoListComponent implements OnInit {
 
   removeTodoFromFormArray(id: number): void {
     const index = this.todosFormArray.controls.findIndex(
-      (todoFormGroup) => todoFormGroup.get('id')?.value === id,
+      (todoFormGroup) => todoFormGroup.get('id')?.value === id
     );
 
     if (index !== -1) {
@@ -75,7 +75,7 @@ export class TodoListComponent implements OnInit {
 
   deleteAllCompleted(): void {
     const completedTodos = this.todosFormArray.controls.filter(
-      (todoFormGroup) => todoFormGroup.get('completed')?.value === true,
+      (todoFormGroup) => todoFormGroup.get('completed')?.value === true
     );
 
     completedTodos.forEach((todoFormGroup) => {
@@ -90,7 +90,7 @@ export class TodoListComponent implements OnInit {
 
   hasCompletedTodos(): boolean {
     return this.todosFormArray.controls.some(
-      (todoFormGroup) => todoFormGroup.get('completed')?.value === true,
+      (todoFormGroup) => todoFormGroup.get('completed')?.value === true
     );
   }
 }
