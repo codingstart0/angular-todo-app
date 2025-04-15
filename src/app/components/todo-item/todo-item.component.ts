@@ -51,6 +51,13 @@ export class TodoItemComponent implements OnInit {
     }
   }
 
+  onEnterKey(event: Event): void {
+    const keyboardEvent = event as KeyboardEvent;
+    event.preventDefault();
+    event.stopPropagation();
+    this.saveEdit();
+  }
+
   toggleTodo(): void {
     if (this.idControl && this.completedControl) {
       this.todoService
@@ -73,6 +80,7 @@ export class TodoItemComponent implements OnInit {
 
   deleteTodo(): void {
     if (this.idControl) {
+      console.log('[deleteTodo] Called on ID:', this.idControl?.value);
       this.todoService.removeTodo(this.idControl.value).subscribe(() => {
         console.log('Emitting delete event for ID:', this.idControl?.value);
         this.deleteTodoEvent.emit(this.idControl?.value);
@@ -82,13 +90,7 @@ export class TodoItemComponent implements OnInit {
 
   saveEdit(): void {
     if (this.idControl && this.titleControl) {
-      console.log(
-        '[saveEdit] ID:',
-        this.idControl.value,
-        'New title:',
-        this.titleControl.value,
-      );
-
+      console.log('[saveEdit] Called on ID:', this.idControl?.value);
       this.todoService
         .updateTodo({
           id: this.idControl.value,

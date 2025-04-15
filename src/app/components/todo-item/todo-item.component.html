@@ -14,9 +14,8 @@
     *ngIf="titleControl && isEditing"
     [formControl]="titleControl"
     (blur)="saveEdit()"
-    (keydown.enter)="saveEdit()"
+    (keydown.enter)="onEnterKey($event)"
     (keydown.escape)="isEditing = false"
-    autofocus
   />
 
   <button (click)="deleteTodo()">Delete</button>
