@@ -4,7 +4,6 @@ import {
   Input,
   Output,
   OnInit,
-  AfterViewChecked,
   ViewChild,
   ElementRef,
   NgZone,
@@ -42,8 +41,9 @@ export class TodoItemComponent implements OnInit {
     this.completedControl = this.todoFormGroup?.get('completed') as FormControl;
   }
 
-  ngAfterViewInit(): void {
-    if (this.isEditing && this.titleInput?.nativeElement) {
+  ngAfterViewChecked(): void {
+    if (this.isEditing && this.shouldFocus && this.titleInput?.nativeElement) {
+      this.shouldFocus = false;
       this.ngZone.run(() => {
         this.titleInput?.nativeElement.select();
         this.titleInput?.nativeElement.focus();
@@ -80,9 +80,7 @@ export class TodoItemComponent implements OnInit {
 
   deleteTodo(): void {
     if (this.idControl) {
-      console.log('[deleteTodo] Called on ID:', this.idControl?.value);
       this.todoService.removeTodo(this.idControl.value).subscribe(() => {
-        console.log('Emitting delete event for ID:', this.idControl?.value);
         this.deleteTodoEvent.emit(this.idControl?.value);
       });
     }
@@ -90,14 +88,12 @@ export class TodoItemComponent implements OnInit {
 
   saveEdit(): void {
     if (this.idControl && this.titleControl) {
-      console.log('[saveEdit] Called on ID:', this.idControl?.value);
       this.todoService
         .updateTodo({
           id: this.idControl.value,
           title: this.titleControl.value,
         })
         .subscribe((updateTodo) => {
-          console.log('[saveEdit] Updated Todo:', updateTodo);
           this.titleControl?.setValue(updateTodo.title);
           this.isEditing = false;
         });

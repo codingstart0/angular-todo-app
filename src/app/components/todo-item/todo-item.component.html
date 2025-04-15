@@ -5,7 +5,7 @@
     (change)="toggleTodo()"
   ></mat-checkbox>
 
-  <span *ngIf="titleControl && !isEditing" (dblclick)="editTodo()">
+  <span *ngIf="titleControl && !isEditing" (click)="editTodo()">
     {{ titleControl!.value }}
   </span>
 

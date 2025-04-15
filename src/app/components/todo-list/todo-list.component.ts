@@ -64,16 +64,12 @@ export class TodoListComponent implements OnInit {
       (todoFormGroup) => todoFormGroup.get('id')?.value === id,
     );
 
-    console.log('Trying to delete ID:', id, 'Found at index:', index);
-
     if (index !== -1) {
       this.todosFormArray.removeAt(index);
-      console.log('[removeTodoFromFormArray] Removed todo at index:', index);
     }
   }
 
   onDeleteTodo(id: number): void {
-    console.log('Deleting todo with ID:', id);
     this.removeTodoFromFormArray(id);
   }
 
