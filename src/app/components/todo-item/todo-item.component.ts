@@ -7,6 +7,7 @@ import {
   ViewChild,
   ElementRef,
   NgZone,
+  AfterViewChecked,
 } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { TodoService } from '../../services/todo.service';
@@ -16,7 +17,7 @@ import { TodoService } from '../../services/todo.service';
   templateUrl: './todo-item.component.html',
   styleUrls: ['./todo-item.component.scss'],
 })
-export class TodoItemComponent implements OnInit {
+export class TodoItemComponent implements OnInit, AfterViewChecked {
   @Input() todoFormGroup?: FormGroup;
   @Output() edit = new EventEmitter<void>();
   @Output() deleteTodoEvent = new EventEmitter<number>();
@@ -32,7 +33,7 @@ export class TodoItemComponent implements OnInit {
 
   constructor(
     private todoService: TodoService,
-    private ngZone: NgZone,
+    private ngZone: NgZone
   ) {}
 
   ngOnInit(): void {
@@ -52,7 +53,6 @@ export class TodoItemComponent implements OnInit {
   }
 
   onEnterKey(event: Event): void {
-    const keyboardEvent = event as KeyboardEvent;
     event.preventDefault();
     event.stopPropagation();
     this.saveEdit();

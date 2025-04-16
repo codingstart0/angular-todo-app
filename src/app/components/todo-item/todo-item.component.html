@@ -16,7 +16,8 @@
     (blur)="saveEdit()"
     (keydown.enter)="onEnterKey($event)"
     (keydown.escape)="isEditing = false"
+    placeholder="Enter todo title"
   />
 
-  <button (click)="deleteTodo()">Delete</button>
+  <button type="button" (click)="deleteTodo()">Delete</button>
 </div>
