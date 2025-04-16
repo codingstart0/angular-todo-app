@@ -29,8 +29,13 @@
           }
         ],
         "newline-before-return": ["error"],
-        "lines-between-class-members": ["error", "always"]
-
+        "lines-between-class-members": ["error", "always"],
+        "padding-line-between-statements": [
+          "error",
+          { "blankLine": "always", "prev": "function", "next": "*" },
+          { "blankLine": "always", "prev": "*", "next": "function" }
+        ],
+        "newline-per-chained-call": "error"
       }
     },
     {
