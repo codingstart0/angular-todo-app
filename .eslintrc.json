@@ -30,6 +30,7 @@
         ],
         "newline-before-return": ["error"],
         "lines-between-class-members": ["error", "always"]
+
       }
     },
     {
