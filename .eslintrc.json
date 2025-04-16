@@ -28,7 +28,8 @@
             "style": "kebab-case"
           }
         ],
-        "newline-before-return": ["error"]
+        "newline-before-return": ["error"],
+        "lines-between-class-members": ["error", "always"]
       }
     },
     {
