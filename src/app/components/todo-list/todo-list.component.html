@@ -9,7 +9,7 @@
   <div *ngFor="let todoItemFormGroup of todosFormArray.controls">
     <app-todo-item
       [todoFormGroup]="todoItemFormGroup"
-      (deleteTodoEvent)="onDeleteTodo($event)"
+      (delete)="onDeleteTodo($event)"
     ></app-todo-item>
   </div>
 </form>

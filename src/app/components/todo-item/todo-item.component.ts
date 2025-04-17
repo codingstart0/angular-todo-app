@@ -20,7 +20,7 @@ import { TodoService } from '../../services/todo.service';
 export class TodoItemComponent implements OnInit, AfterViewChecked {
   @Input() todoFormGroup?: FormGroup;
   @Output() edit = new EventEmitter<void>();
-  @Output() deleteTodoEvent = new EventEmitter<number>();
+  @Output() delete = new EventEmitter<number>();
 
   idControl?: FormControl<number>;
   titleControl?: FormControl<string>;
@@ -81,7 +81,7 @@ export class TodoItemComponent implements OnInit, AfterViewChecked {
   deleteTodo(): void {
     if (this.idControl) {
       this.todoService.removeTodo(this.idControl.value).subscribe(() => {
-        this.deleteTodoEvent.emit(this.idControl?.value);
+        this.delete.emit(this.idControl?.value);
       });
     }
   }
