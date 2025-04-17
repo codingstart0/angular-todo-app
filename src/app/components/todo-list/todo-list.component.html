@@ -1,15 +1,19 @@
 <h2>Todo List</h2>
 
-<form [formGroup]="todoForm" (ngSubmit)="addTodo()">
+<form [formGroup]="newTodoForm" (ngSubmit)="addTodo()">
   <input formControlName="title" placeholder="Add a todo" required />
   <button type="submit">Add Todo</button>
 </form>
 
-<!-- TODO move to todo-item -->
-<ul>
-  <li *ngFor="let todo of todos">
-    <mat-checkbox (change)="toggleTodo(todo)" [checked]="todo.completed">
-      {{ todo.title }}
-    </mat-checkbox>
-  </li>
-</ul>
+<form [formGroup]="todosFormGroup">
+  <div *ngFor="let todoItemFormGroup of todosFormArray.controls">
+    <app-todo-item
+      [todoFormGroup]="todoItemFormGroup"
+      (delete)="onDeleteTodo($event)"
+    ></app-todo-item>
+  </div>
+</form>
+
+<button *ngIf="hasCompletedTodos()" (click)="deleteAllCompleted()">
+  Delete Completed Todos
+</button>

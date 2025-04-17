@@ -1,1 +1,23 @@
-<p>todo-item works!</p>
+<div class="todo-item">
+  <mat-checkbox
+    *ngIf="completedControl"
+    [formControl]="completedControl"
+    (change)="toggleTodo()"
+  ></mat-checkbox>
+
+  <span *ngIf="titleControl && !isEditing" (click)="editTodo()">
+    {{ titleControl!.value }}
+  </span>
+
+  <input
+    #titleInput
+    *ngIf="titleControl && isEditing"
+    [formControl]="titleControl"
+    (blur)="saveEdit()"
+    (keydown.enter)="onEnterKey($event)"
+    (keydown.escape)="isEditing = false"
+    placeholder="Enter todo title"
+  />
+
+  <button type="button" (click)="deleteTodo()">Delete</button>
+</div>
