@@ -7,7 +7,7 @@ import { Todo } from '../interfaces/todo.interface';
   providedIn: 'root',
 })
 export class TodoService {
-  private apiBaseUrl = 'http://localhost:3000';
+  private apiBaseUrl = 'https://680209ec81c7e9fbcc44224e.mockapi.io';
 
   constructor(private http: HttpClient) {}
 
@@ -20,7 +20,7 @@ export class TodoService {
   }
 
   updateTodo(partialTodo: Partial<Todo> & { id: number }): Observable<Todo> {
-    return this.http.patch<Todo>(
+    return this.http.put<Todo>(
       `${this.apiBaseUrl}/todos/${partialTodo.id}`,
       partialTodo
     );
