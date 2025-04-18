@@ -20,7 +20,7 @@ export class TodoService {
   }
 
   updateTodo(partialTodo: Partial<Todo> & { id: number }): Observable<Todo> {
-    return this.http.patch<Todo>(
+    return this.http.put<Todo>(
       `${this.apiBaseUrl}/todos/${partialTodo.id}`,
       partialTodo
     );
