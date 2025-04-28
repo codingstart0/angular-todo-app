@@ -59,10 +59,11 @@ export class TodoItemComponent implements OnInit, AfterViewChecked {
   }
 
   toggleTodo(): void {
-    if (this.idControl && this.completedControl) {
+    if (this.idControl && this.titleControl && this.completedControl) {
       this.todoService
         .updateTodo({
           id: this.idControl.value,
+          title: this.titleControl.value,
           completed: this.completedControl.value,
         })
         .subscribe((updateTodo) => {
@@ -87,11 +88,12 @@ export class TodoItemComponent implements OnInit, AfterViewChecked {
   }
 
   saveEdit(): void {
-    if (this.idControl && this.titleControl) {
+    if (this.idControl && this.titleControl && this.completedControl) {
       this.todoService
         .updateTodo({
           id: this.idControl.value,
           title: this.titleControl.value,
+          completed: this.completedControl.value,
         })
         .subscribe((updateTodo) => {
           this.titleControl?.setValue(updateTodo.title);

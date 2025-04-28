@@ -19,11 +19,8 @@ export class TodoService {
     return this.http.post<Todo>(`${this.apiBaseUrl}/todos`, todo);
   }
 
-  updateTodo(partialTodo: Partial<Todo> & { id: number }): Observable<Todo> {
-    return this.http.put<Todo>(
-      `${this.apiBaseUrl}/todos/${partialTodo.id}`,
-      partialTodo
-    );
+  updateTodo(todo: Todo): Observable<Todo> {
+    return this.http.put<Todo>(`${this.apiBaseUrl}/todos/${todo.id}`, todo);
   }
 
   removeTodo(id: number): Observable<void> {
