@@ -2,7 +2,7 @@
 
 <form [formGroup]="newTodoForm" (ngSubmit)="addTodo()">
   <input formControlName="title" placeholder="Add a todo" required />
-  <button type="submit">Add Todo</button>
+  <button mat-raised-button color="primary" type="submit">Add Todo</button>
 </form>
 
 <form [formGroup]="todosFormGroup">
@@ -14,6 +14,11 @@
   </div>
 </form>
 
-<button *ngIf="hasCompletedTodos()" (click)="deleteAllCompleted()">
+<button
+  mat-raised-button
+  color="warn"
+  *ngIf="hasCompletedTodos()"
+  (click)="deleteAllCompleted()"
+>
   Delete Completed Todos
 </button>
