@@ -1,7 +1,15 @@
 <h2>Todo List</h2>
 
 <form [formGroup]="newTodoForm" (ngSubmit)="addTodo()">
-  <input formControlName="title" placeholder="Add a todo" required />
+  <mat-form-field class="example-full-width">
+    <mat-label>Add a todo</mat-label>
+    <input
+      matInput
+      formControlName="title"
+      placeholder="Ex. Build a todo app"
+    />
+  </mat-form-field>
+
   <button mat-raised-button color="primary" type="submit">Add Todo</button>
 </form>
 
