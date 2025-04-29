@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TodoService } from '../../services/todo.service';
 import { Todo } from '../../interfaces/todo.interface';
 import { FormGroup, FormControl, FormArray } from '@angular/forms';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-todo-list',
@@ -24,6 +25,7 @@ export class TodoListComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log(environment.apiBaseUrl);
     this.todoService.getTodos().subscribe((todos) => {
       this.buildTodosForm(todos);
     });
