@@ -10,6 +10,7 @@
   </span>
 
   <input
+    matInput
     #titleInput
     *ngIf="titleControl && isEditing"
     [formControl]="titleControl"
@@ -19,7 +20,7 @@
     placeholder="Enter todo title"
   />
 
-  <button mat-raised-button color="warn" type="button" (click)="deleteTodo()">
-    Delete
+  <button mat-icon-button color="warn" (click)="deleteTodo()">
+    <mat-icon>delete</mat-icon>
   </button>
 </div>

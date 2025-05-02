@@ -1,32 +1,37 @@
-<h2>Todo List</h2>
+<div class="todo-container">
+  <mat-card class="todo-card">
+    <mat-card-title>Todo List</mat-card-title>
+    <mat-card-content>
+      <form [formGroup]="newTodoForm" (ngSubmit)="addTodo()" class="todo-form">
+        <mat-form-field class="full-width">
+          <mat-label>Add a todo</mat-label>
+          <input
+            matInput
+            formControlName="title"
+            placeholder="Ex. Build a todo app"
+          />
+        </mat-form-field>
+        <button mat-raised-button color="primary" type="submit">Add</button>
+      </form>
 
-<form [formGroup]="newTodoForm" (ngSubmit)="addTodo()">
-  <mat-form-field class="example-full-width">
-    <mat-label>Add a todo</mat-label>
-    <input
-      matInput
-      formControlName="title"
-      placeholder="Ex. Build a todo app"
-    />
-  </mat-form-field>
+      <form [formGroup]="todosFormGroup">
+        <div class="todo-list">
+          <app-todo-item
+            *ngFor="let todoItemFormGroup of todosFormArray.controls"
+            [todoFormGroup]="todoItemFormGroup"
+            (delete)="onDeleteTodo($event)"
+          ></app-todo-item>
+        </div>
+      </form>
 
-  <button mat-raised-button color="primary" type="submit">Add Todo</button>
-</form>
-
-<form [formGroup]="todosFormGroup">
-  <div *ngFor="let todoItemFormGroup of todosFormArray.controls">
-    <app-todo-item
-      [todoFormGroup]="todoItemFormGroup"
-      (delete)="onDeleteTodo($event)"
-    ></app-todo-item>
-  </div>
-</form>
-
-<button
-  mat-raised-button
-  color="warn"
-  *ngIf="hasCompletedTodos()"
-  (click)="deleteAllCompleted()"
->
-  Delete Completed Todos
-</button>
+      <button
+        mat-raised-button
+        color="warn"
+        *ngIf="hasCompletedTodos()"
+        (click)="deleteAllCompleted()"
+      >
+        Delete Completed Todos
+      </button>
+    </mat-card-content>
+  </mat-card>
+</div>
