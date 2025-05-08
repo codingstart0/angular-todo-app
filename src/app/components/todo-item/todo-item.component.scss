@@ -1,43 +1,15 @@
-.todo-container {
-  display: flex;
-  justify-content: center;
-  padding: 2rem;
-}
-
-.todo-card {
-  width: 100%;
-  max-width: 600px;
-  padding: 1rem;
-}
-
-.todo-form {
-  display: flex;
-  gap: 1rem;
-  margin-bottom: 1rem;
-  align-items: flex-end;
-}
-
-.full-width {
-  flex: 1;
-}
-
-.todo-list {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  margin-bottom: 1rem;
-}
-
 .todo-item {
   display: flex;
   align-items: center;
   gap: 1rem;
-  padding: 0.5rem;
-  background: #f9f9f9;
+  padding: 0.75rem;
+  background: #fafafa;
   border-radius: 8px;
+  border: 1px solid #ddd;
 }
 
 .todo-title {
   flex: 1;
   cursor: pointer;
+  word-break: break-word;
 }

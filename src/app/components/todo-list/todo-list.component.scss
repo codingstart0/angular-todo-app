@@ -1,0 +1,64 @@
+.todo-container {
+  display: flex;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.todo-card {
+  width: 100%;
+  max-width: 600px;
+  padding: 1.5rem;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.todo-form {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  margin-bottom: 2rem;
+}
+
+.input-button-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+
+  mat-form-field {
+    margin: 0;
+  }
+
+  .mat-mdc-text-field {
+    border-radius: 8px 8px 0 0;
+  }
+
+  .add-button {
+    border-radius: 0 0 5px 5px;
+  }
+}
+
+::ng-deep .mat-mdc-form-field-subscript-wrapper {
+  display: none;
+  height: 0;
+  padding: 0;
+  margin: 0;
+}
+
+.full-width {
+  flex: 1;
+}
+
+.todo-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+@media (max-width: 600px) {
+  .todo-form {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
