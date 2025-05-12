@@ -1,26 +1,40 @@
 <div class="todo-item">
   <mat-checkbox
+    class="todo-checkbox"
     *ngIf="completedControl"
     [formControl]="completedControl"
     (change)="toggleTodo()"
   ></mat-checkbox>
 
-  <span *ngIf="titleControl && !isEditing" (click)="editTodo()">
-    {{ titleControl!.value }}
-  </span>
+  <div class="todo-title-container" (click)="editTodo()">
+    <span *ngIf="titleControl && !isEditing" (click)="editTodo()">
+      {{ titleControl!.value }}
+    </span>
 
-  <input
-    matInput
-    #titleInput
-    *ngIf="titleControl && isEditing"
-    [formControl]="titleControl"
-    (blur)="saveEdit()"
-    (keydown.enter)="onEnterKey($event)"
-    (keydown.escape)="isEditing = false"
-    placeholder="Enter todo title"
-  />
+    <mat-form-field
+      *ngIf="titleControl && isEditing"
+      appearance="outline"
+      class="todo-edit-field"
+    >
+      <input
+        matInput
+        #titleInput
+        [formControl]="titleControl"
+        (blur)="saveEdit()"
+        (keydown.enter)="onEnterKey($event)"
+        (keydown.escape)="isEditing = false"
+        placeholder="Enter todo title"
+      />
+    </mat-form-field>
+  </div>
 
-  <button mat-icon-button color="warn" (click)="deleteTodo()">
+  <button
+    type="button"
+    mat-icon-button
+    color="warn"
+    (click)="deleteTodo()"
+    class="delete-btn"
+  >
     <mat-icon>delete</mat-icon>
   </button>
 </div>
