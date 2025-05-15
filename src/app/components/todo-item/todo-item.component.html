@@ -16,7 +16,7 @@
       appearance="outline"
       class="todo-edit-field"
     >
-      <input
+      <textarea
         matInput
         #titleInput
         [formControl]="titleControl"
@@ -24,7 +24,7 @@
         (keydown.enter)="onEnterKey($event)"
         (keydown.escape)="isEditing = false"
         placeholder="Enter todo title"
-      />
+      ></textarea>
     </mat-form-field>
   </div>
 

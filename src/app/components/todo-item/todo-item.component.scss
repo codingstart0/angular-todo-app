@@ -41,6 +41,14 @@
 
   .todo-edit-field {
     width: 100%;
+
+    textarea {
+      white-space: pre-wrap;
+      overflow: visible;
+      text-overflow: unset;
+      word-break: break-word;
+      resize: none;
+    }
   }
 
   ::ng-deep .mat-form-field-wrapper {
