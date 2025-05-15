@@ -19,12 +19,17 @@
 
   .todo-title-container {
     flex-grow: 1;
+    min-width: 0;
+    max-width: 100%;
     cursor: pointer;
   }
 
   span {
     display: block;
     padding: 0.5rem 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .todo-edit-field {
