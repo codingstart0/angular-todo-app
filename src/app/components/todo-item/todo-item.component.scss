@@ -1,0 +1,65 @@
+.todo-title {
+  flex: 1;
+  cursor: pointer;
+  word-break: break-word;
+}
+
+.todo-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.5rem 0;
+  background: #fafafa;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+
+  .todo-checkbox {
+    flex-shrink: 0;
+  }
+
+  .todo-title-container {
+    flex-grow: 1;
+    min-width: 0;
+    max-width: 100%;
+    cursor: pointer;
+  }
+
+  span {
+    display: block;
+    padding: 0.5rem 0;
+    white-space: nowrap;
+    overflow: hidden;
+    overflow-wrap: break-word;
+    text-overflow: ellipsis;
+
+    &:hover {
+      white-space: normal;
+      overflow: visible;
+      text-overflow: unset;
+    }
+  }
+
+  .todo-edit-field {
+    width: 100%;
+
+    textarea {
+      white-space: pre-wrap;
+      overflow: visible;
+      text-overflow: unset;
+      word-break: break-word;
+      resize: none;
+    }
+  }
+
+  ::ng-deep .mat-form-field-wrapper {
+    padding-bottom: 0;
+  }
+
+  ::ng-deep .mat-form-field-subscript-wrapper {
+    display: none;
+  }
+
+  .delete-btn {
+    flex-shrink: 0;
+  }
+}

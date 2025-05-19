@@ -8,6 +8,7 @@ import {
   ElementRef,
   NgZone,
   AfterViewChecked,
+  ChangeDetectorRef,
 } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { TodoService } from '../../services/todo.service';
@@ -33,7 +34,8 @@ export class TodoItemComponent implements OnInit, AfterViewChecked {
 
   constructor(
     private todoService: TodoService,
-    private ngZone: NgZone
+    private ngZone: NgZone,
+    private changeDetectorRef: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -48,6 +50,7 @@ export class TodoItemComponent implements OnInit, AfterViewChecked {
       this.ngZone.run(() => {
         this.titleInput?.nativeElement.select();
         this.titleInput?.nativeElement.focus();
+        this.changeDetectorRef.detectChanges();
       });
     }
   }
