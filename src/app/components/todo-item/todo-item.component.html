@@ -19,6 +19,9 @@
       <textarea
         matInput
         #titleInput
+        cdkTextareaAutosize
+        [cdkAutosizeMinRows]="1"
+        [cdkAutosizeMaxRows]="5"
         [formControl]="titleControl"
         (blur)="saveEdit()"
         (keydown.enter)="onEnterKey($event)"

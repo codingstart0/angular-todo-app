@@ -9,6 +9,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
+import { TextFieldModule } from '@angular/cdk/text-field';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -30,6 +31,7 @@ import { TodoItemComponent } from './components/todo-item/todo-item.component';
     MatInputModule,
     MatCardModule,
     MatIconModule,
+    TextFieldModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
