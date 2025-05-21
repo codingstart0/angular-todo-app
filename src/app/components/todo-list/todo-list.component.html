@@ -10,7 +10,16 @@
               matInput
               formControlName="title"
               placeholder="Ex. Build a todo app"
+              required
             />
+            <mat-error
+              *ngIf="
+                newTodoForm.get('title')?.hasError('required') &&
+                newTodoForm.get('title')?.touched
+              "
+            >
+              Todo title is required.
+            </mat-error>
           </mat-form-field>
           <button
             mat-raised-button

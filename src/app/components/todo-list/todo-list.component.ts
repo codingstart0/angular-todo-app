@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormControl, FormArray, Validators } from '@angular/forms';
+
 import { TodoService } from '../../services/todo.service';
 import { Todo } from '../../interfaces/todo.interface';
-import { FormGroup, FormControl, FormArray } from '@angular/forms';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -16,7 +17,7 @@ export class TodoListComponent implements OnInit {
 
   constructor(private todoService: TodoService) {
     this.newTodoForm = new FormGroup({
-      title: new FormControl(''),
+      title: new FormControl('', Validators.required),
     });
     this.todosFormGroup = new FormGroup({
       todos: new FormArray([]),
@@ -50,6 +51,12 @@ export class TodoListComponent implements OnInit {
   }
 
   addTodo(): void {
+    if (this.newTodoForm.invalid) {
+      this.newTodoForm.get('title')?.markAsTouched();
+
+      return;
+    }
+
     const newTodo: Omit<Todo, 'id'> = {
       title: this.newTodoForm.value.title,
       completed: false,
