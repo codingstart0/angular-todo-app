@@ -1,4 +1,11 @@
+#Alias to this project: ang
+
 #TODO
+
+1. Modify default theming: https://v15.material.angular.dev/guide/theming
+   Setup custom colors for primary (blue shades) and accent (orange shages) colors.
+
+2. Extract common values, like gap, gap-sm, gap-lg, gap-xl, gap-xs and etc into a separate scss file which uses CSS variables (tokens), and usage in here would be: gap: var(--gap);, extract prop values like, sizes, font sizes, font family, gaps, spaces, colors.
 
 # AngularTodoApp
 

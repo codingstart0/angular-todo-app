@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { FormGroup, FormControl, FormArray, Validators } from '@angular/forms';
 
 import { TodoService } from '../../services/todo.service';
@@ -14,11 +14,14 @@ export class TodoListComponent implements OnInit {
   newTodoForm: FormGroup;
   todosFormGroup: FormGroup;
   todosFormArray: FormArray<FormGroup>;
+  submitted = false;
 
-  constructor(private todoService: TodoService) {
-    this.newTodoForm = new FormGroup({
-      title: new FormControl('', Validators.required),
-    });
+  constructor(
+    private todoService: TodoService,
+    private cdr: ChangeDetectorRef
+  ) {
+    this.newTodoForm = this.createNewTodoForm();
+
     this.todosFormGroup = new FormGroup({
       todos: new FormArray([]),
     });
@@ -29,6 +32,12 @@ export class TodoListComponent implements OnInit {
     console.log(environment.apiBaseUrl);
     this.todoService.getTodos().subscribe((todos) => {
       this.buildTodosForm(todos);
+    });
+  }
+
+  private createNewTodoForm(): FormGroup {
+    return new FormGroup({
+      title: new FormControl('', Validators.required),
     });
   }
 
@@ -51,8 +60,12 @@ export class TodoListComponent implements OnInit {
   }
 
   addTodo(): void {
-    if (this.newTodoForm.invalid) {
-      this.newTodoForm.get('title')?.markAsTouched();
+    this.submitted = true;
+
+    const titleControl = this.newTodoForm.get('title');
+
+    if (!titleControl || this.newTodoForm.invalid) {
+      titleControl?.markAsTouched();
 
       return;
     }
@@ -64,7 +77,9 @@ export class TodoListComponent implements OnInit {
 
     this.todoService.addTodo(newTodo).subscribe((savedTodo) => {
       this.addTodoToFormArray(savedTodo);
-      this.newTodoForm.reset();
+      this.newTodoForm = this.createNewTodoForm();
+      this.submitted = false;
+      this.cdr.detectChanges();
     });
   }
 
@@ -101,5 +116,12 @@ export class TodoListComponent implements OnInit {
     return this.todosFormArray.controls.some(
       (todoFormGroup) => todoFormGroup.get('completed')?.value === true
     );
+  }
+
+  showTitleError(): boolean {
+    const control = this.newTodoForm.get('title');
+    if (!control) return false;
+
+    return !!control && control.hasError('required') && control.touched;
   }
 }
