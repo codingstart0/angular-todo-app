@@ -1,9 +1,11 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { FormGroup, FormControl, FormArray, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 
 import { TodoService } from '../../services/todo.service';
 import { Todo } from '../../interfaces/todo.interface';
 import { environment } from 'src/environments/environment';
+import { ConfirmDialogComponent } from '../../components/confirm-dialog/confirm-dialog.component'; // Adjust path if needed
 
 @Component({
   selector: 'app-todo-list',
@@ -18,7 +20,8 @@ export class TodoListComponent implements OnInit {
 
   constructor(
     private todoService: TodoService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private dialog: MatDialog
   ) {
     this.newTodoForm = this.createNewTodoForm();
 
@@ -94,7 +97,15 @@ export class TodoListComponent implements OnInit {
   }
 
   onDeleteTodo(id: number): void {
-    this.removeTodoFromFormArray(id);
+    const dialogRef = this.dialog.open(ConfirmDialogComponent);
+
+    dialogRef.afterClosed().subscribe((confirmed: boolean) => {
+      if (confirmed) {
+        this.todoService.removeTodo(id).subscribe(() => {
+          this.removeTodoFromFormArray(id);
+        });
+      }
+    });
   }
 
   deleteAllCompleted(): void {

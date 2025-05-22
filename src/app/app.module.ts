@@ -10,14 +10,21 @@ import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { TextFieldModule } from '@angular/cdk/text-field';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TodoListComponent } from './components/todo-list/todo-list.component';
 import { TodoItemComponent } from './components/todo-item/todo-item.component';
+import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 
 @NgModule({
-  declarations: [AppComponent, TodoListComponent, TodoItemComponent],
+  declarations: [
+    AppComponent,
+    TodoListComponent,
+    TodoItemComponent,
+    ConfirmDialogComponent,
+  ],
   imports: [
     BrowserModule,
     FormsModule,
@@ -32,6 +39,7 @@ import { TodoItemComponent } from './components/todo-item/todo-item.component';
     MatCardModule,
     MatIconModule,
     TextFieldModule,
+    MatDialogModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
