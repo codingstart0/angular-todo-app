@@ -44,6 +44,15 @@ export class TodoListComponent implements OnInit {
     });
   }
 
+  private openConfirmDialog(message: string) {
+    return this.dialog
+      .open(ConfirmDialogComponent, {
+        width: '300px',
+        data: { message },
+      })
+      .afterClosed();
+  }
+
   buildTodosForm(todos: Todo[]) {
     this.todosFormArray.clear();
 
@@ -97,9 +106,9 @@ export class TodoListComponent implements OnInit {
   }
 
   onDeleteTodo(id: number): void {
-    const dialogRef = this.dialog.open(ConfirmDialogComponent);
-
-    dialogRef.afterClosed().subscribe((confirmed: boolean) => {
+    this.openConfirmDialog(
+      'Are you sure you want to delete this todo?'
+    ).subscribe((confirmed) => {
       if (confirmed) {
         this.todoService.removeTodo(id).subscribe(() => {
           this.removeTodoFromFormArray(id);
@@ -109,15 +118,21 @@ export class TodoListComponent implements OnInit {
   }
 
   deleteAllCompleted(): void {
-    const completedTodos = this.todosFormArray.controls.filter(
-      (todoFormGroup) => todoFormGroup.get('completed')?.value === true
-    );
+    this.openConfirmDialog(
+      'Are you sure you want to delete all completed todos?'
+    ).subscribe((confirmed) => {
+      if (confirmed) {
+        const completedTodos = this.todosFormArray.controls.filter(
+          (todoFormGroup) => todoFormGroup.get('completed')?.value === true
+        );
 
-    completedTodos.forEach((todoFormGroup) => {
-      const id = todoFormGroup.get('id')?.value;
-      if (id !== undefined) {
-        this.todoService.removeTodo(id).subscribe(() => {
-          this.removeTodoFromFormArray(id);
+        completedTodos.forEach((todoFormGroup) => {
+          const id = todoFormGroup.get('id')?.value;
+          if (id !== undefined) {
+            this.todoService.removeTodo(id).subscribe(() => {
+              this.removeTodoFromFormArray(id);
+            });
+          }
         });
       }
     });
@@ -134,5 +149,9 @@ export class TodoListComponent implements OnInit {
     if (!control) return false;
 
     return !!control && control.hasError('required') && control.touched;
+  }
+
+  trackById(index: number, group: FormGroup): number {
+    return group.get('id')?.value;
   }
 }

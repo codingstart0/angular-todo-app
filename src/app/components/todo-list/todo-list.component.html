@@ -30,7 +30,10 @@
       <form [formGroup]="todosFormGroup">
         <div class="todo-list">
           <app-todo-item
-            *ngFor="let todoItemFormGroup of todosFormArray.controls"
+            *ngFor="
+              let todoItemFormGroup of todosFormArray.controls;
+              trackBy: trackById
+            "
             [todoFormGroup]="todoItemFormGroup"
             (delete)="onDeleteTodo($event)"
           ></app-todo-item>

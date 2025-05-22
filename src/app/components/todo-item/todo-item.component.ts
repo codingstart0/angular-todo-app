@@ -10,6 +10,9 @@ import {
   AfterViewChecked,
   ChangeDetectorRef,
 } from '@angular/core';
+
+import { MatDialog } from '@angular/material/dialog';
+
 import { FormGroup, FormControl } from '@angular/forms';
 import { TodoService } from '../../services/todo.service';
 
@@ -35,7 +38,8 @@ export class TodoItemComponent implements OnInit, AfterViewChecked {
   constructor(
     private todoService: TodoService,
     private ngZone: NgZone,
-    private changeDetectorRef: ChangeDetectorRef
+    private changeDetectorRef: ChangeDetectorRef,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -83,10 +87,9 @@ export class TodoItemComponent implements OnInit, AfterViewChecked {
   }
 
   deleteTodo(): void {
-    if (this.idControl) {
-      this.todoService.removeTodo(this.idControl.value).subscribe(() => {
-        this.delete.emit(this.idControl?.value);
-      });
+    const id = this.idControl?.value;
+    if (id != null) {
+      this.delete.emit(id);
     }
   }
 
