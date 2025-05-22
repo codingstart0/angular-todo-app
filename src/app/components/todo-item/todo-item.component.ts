@@ -10,11 +10,11 @@ import {
   AfterViewChecked,
   ChangeDetectorRef,
 } from '@angular/core';
-
 import { MatDialog } from '@angular/material/dialog';
-
 import { FormGroup, FormControl } from '@angular/forms';
+
 import { TodoService } from '../../services/todo.service';
+import { BlurService } from '../../services/blur.service';
 
 @Component({
   selector: 'app-todo-item',
@@ -39,7 +39,8 @@ export class TodoItemComponent implements OnInit, AfterViewChecked {
     private todoService: TodoService,
     private ngZone: NgZone,
     private changeDetectorRef: ChangeDetectorRef,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private blurService: BlurService
   ) {}
 
   ngOnInit(): void {
@@ -87,9 +88,7 @@ export class TodoItemComponent implements OnInit, AfterViewChecked {
   }
 
   deleteTodo(): void {
-    requestAnimationFrame(() => {
-      (document.activeElement as HTMLElement)?.blur();
-    });
+    this.blurService.blurActiveElement();
 
     if (this.todoFormGroup) {
       this.delete.emit(this.todoFormGroup.get('id')?.value);

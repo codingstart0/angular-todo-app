@@ -3,9 +3,10 @@ import { FormGroup, FormControl, FormArray, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 
 import { TodoService } from '../../services/todo.service';
+import { BlurService } from '../../services/blur.service';
 import { Todo } from '../../interfaces/todo.interface';
 import { environment } from 'src/environments/environment';
-import { ConfirmDialogComponent } from '../../components/confirm-dialog/confirm-dialog.component'; // Adjust path if needed
+import { ConfirmDialogComponent } from '../../components/confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-todo-list',
@@ -21,7 +22,8 @@ export class TodoListComponent implements OnInit {
   constructor(
     private todoService: TodoService,
     private cdr: ChangeDetectorRef,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private blurService: BlurService
   ) {
     this.newTodoForm = this.createNewTodoForm();
 
@@ -119,6 +121,8 @@ export class TodoListComponent implements OnInit {
   }
 
   deleteAllCompleted(): void {
+    this.blurService.blurActiveElement();
+
     this.openConfirmDialog(
       'Are you sure you want to delete all completed todos?'
     ).subscribe((confirmed) => {
