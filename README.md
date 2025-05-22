@@ -2,6 +2,11 @@
 
 #TODO
 
+1. Blocked aria-hidden on an element because its descendant retained focus. It's still an error for "Delete Completed Todos" button.
+   But resolved for trashbin icon button, thru the "deleteTodo" function in "todo-item.component.ts" file. So we should made reuseble function and used it for both icon and delete buttons.
+
+# TODO extra
+
 1. Modify default theming: https://v15.material.angular.dev/guide/theming
    Setup custom colors for primary (blue shades) and accent (orange shages) colors.
 

@@ -87,9 +87,12 @@ export class TodoItemComponent implements OnInit, AfterViewChecked {
   }
 
   deleteTodo(): void {
-    const id = this.idControl?.value;
-    if (id != null) {
-      this.delete.emit(id);
+    requestAnimationFrame(() => {
+      (document.activeElement as HTMLElement)?.blur();
+    });
+
+    if (this.todoFormGroup) {
+      this.delete.emit(this.todoFormGroup.get('id')?.value);
     }
   }
 
