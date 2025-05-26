@@ -25,7 +25,7 @@
         [formControl]="titleControl"
         (blur)="saveEdit()"
         (keydown.enter)="onEnterKey($event)"
-        (keydown.escape)="isEditing = false"
+        (keydown.escape)="onEscapeKey()"
         placeholder="Enter todo title"
       ></textarea>
     </mat-form-field>

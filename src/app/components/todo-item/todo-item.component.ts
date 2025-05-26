@@ -66,6 +66,10 @@ export class TodoItemComponent implements OnInit, AfterViewChecked {
     this.saveEdit();
   }
 
+  onEscapeKey(): void {
+    this.isEditing = false;
+  }
+
   toggleTodo(): void {
     if (this.idControl && this.titleControl && this.completedControl) {
       this.todoService
