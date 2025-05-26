@@ -1,13 +1,17 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
-import { FormGroup, FormControl, FormArray, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import {
+  FormGroup,
+  FormControl,
+  FormArray,
+  Validators,
+  FormGroupDirective,
+} from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 
 import { TodoService } from '../../services/todo.service';
 import { BlurService } from '../../services/blur.service';
 import { Todo } from '../../interfaces/todo.interface';
-import { environment } from 'src/environments/environment';
 import { ConfirmDialogComponent } from '../../components/confirm-dialog/confirm-dialog.component';
-import { ResetOnSubmitErrorStateMatcher } from '../../utils/reset-on-submit-error-state-matcher';
 
 @Component({
   selector: 'app-todo-list',
@@ -18,18 +22,16 @@ export class TodoListComponent implements OnInit {
   newTodoForm: FormGroup;
   todosFormGroup: FormGroup;
   todosFormArray: FormArray<FormGroup>;
-  submitted = false;
-
-  matcher = new ResetOnSubmitErrorStateMatcher(() => this.submitted);
+  submitting = false;
 
   constructor(
     private todoService: TodoService,
-    private cdr: ChangeDetectorRef,
     private dialog: MatDialog,
     private blurService: BlurService
   ) {
     this.newTodoForm = this.createNewTodoForm();
-    this.submitted = false;
+
+    this.submitting = false;
 
     this.todosFormGroup = new FormGroup({
       todos: new FormArray([]),
@@ -38,7 +40,6 @@ export class TodoListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(environment.apiBaseUrl);
     this.todoService.getTodos().subscribe((todos) => {
       this.buildTodosForm(todos);
     });
@@ -78,16 +79,14 @@ export class TodoListComponent implements OnInit {
     );
   }
 
-  addTodo(): void {
-    this.submitted = true;
-
-    const titleControl = this.newTodoForm.get('title');
-
-    if (!titleControl || this.newTodoForm.invalid) {
-      titleControl?.markAsTouched();
+  addTodo(formDirective: FormGroupDirective): void {
+    if (this.newTodoForm.invalid) {
+      this.newTodoForm.markAllAsTouched();
 
       return;
     }
+
+    this.submitting = true;
 
     const newTodo: Omit<Todo, 'id'> = {
       title: this.newTodoForm.value.title,
@@ -96,20 +95,9 @@ export class TodoListComponent implements OnInit {
 
     this.todoService.addTodo(newTodo).subscribe((savedTodo) => {
       this.addTodoToFormArray(savedTodo);
-      this.newTodoForm.reset({ title: '' });
-      console.log({
-        value: titleControl?.value,
-        pristine: titleControl?.pristine,
-        touched: titleControl?.touched,
-        dirty: titleControl?.dirty,
-        status: titleControl?.status,
-      });
-
-      titleControl?.markAsPristine();
-      titleControl?.markAsUntouched();
-      titleControl?.updateValueAndValidity();
-      this.submitted = false;
-      this.cdr.detectChanges();
+      this.submitting = false;
+      this.newTodoForm.reset();
+      formDirective.resetForm();
     });
   }
 
@@ -167,7 +155,7 @@ export class TodoListComponent implements OnInit {
   showTitleError(): boolean {
     const control = this.newTodoForm.get('title');
 
-    return !!control && control.invalid && (control.touched || this.submitted);
+    return !!control && control.invalid && control.touched;
   }
 
   trackById(index: number, group: FormGroup): number {

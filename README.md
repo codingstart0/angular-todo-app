@@ -1,9 +1,4 @@
-#Alias to this project: ang
-
 #TODO
-
-1. Prevent adding empty TODO item (show error message underneath form text input).
-   Fix permanent requered todo in input field after succesfully adding new todo.
 
 # TODO extra
 
