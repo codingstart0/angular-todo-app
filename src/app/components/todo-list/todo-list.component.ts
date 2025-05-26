@@ -7,6 +7,7 @@ import { BlurService } from '../../services/blur.service';
 import { Todo } from '../../interfaces/todo.interface';
 import { environment } from 'src/environments/environment';
 import { ConfirmDialogComponent } from '../../components/confirm-dialog/confirm-dialog.component';
+import { ResetOnSubmitErrorStateMatcher } from '../../utils/reset-on-submit-error-state-matcher';
 
 @Component({
   selector: 'app-todo-list',
@@ -19,6 +20,8 @@ export class TodoListComponent implements OnInit {
   todosFormArray: FormArray<FormGroup>;
   submitted = false;
 
+  matcher = new ResetOnSubmitErrorStateMatcher(() => this.submitted);
+
   constructor(
     private todoService: TodoService,
     private cdr: ChangeDetectorRef,
@@ -26,6 +29,7 @@ export class TodoListComponent implements OnInit {
     private blurService: BlurService
   ) {
     this.newTodoForm = this.createNewTodoForm();
+    this.submitted = false;
 
     this.todosFormGroup = new FormGroup({
       todos: new FormArray([]),
@@ -92,7 +96,18 @@ export class TodoListComponent implements OnInit {
 
     this.todoService.addTodo(newTodo).subscribe((savedTodo) => {
       this.addTodoToFormArray(savedTodo);
-      this.newTodoForm = this.createNewTodoForm();
+      this.newTodoForm.reset({ title: '' });
+      console.log({
+        value: titleControl?.value,
+        pristine: titleControl?.pristine,
+        touched: titleControl?.touched,
+        dirty: titleControl?.dirty,
+        status: titleControl?.status,
+      });
+
+      titleControl?.markAsPristine();
+      titleControl?.markAsUntouched();
+      titleControl?.updateValueAndValidity();
       this.submitted = false;
       this.cdr.detectChanges();
     });
@@ -151,9 +166,8 @@ export class TodoListComponent implements OnInit {
 
   showTitleError(): boolean {
     const control = this.newTodoForm.get('title');
-    if (!control) return false;
 
-    return !!control && control.hasError('required') && control.touched;
+    return !!control && control.invalid && (control.touched || this.submitted);
   }
 
   trackById(index: number, group: FormGroup): number {
