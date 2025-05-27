@@ -46,9 +46,12 @@ export class TodoListComponent implements OnInit {
   }
 
   private createNewTodoForm(): FormGroup {
-    return new FormGroup({
-      title: new FormControl('', Validators.required),
-    });
+    return new FormGroup(
+      {
+        title: new FormControl('', Validators.required),
+      },
+      { updateOn: 'submit' }
+    );
   }
 
   private openConfirmDialog(message: string) {
