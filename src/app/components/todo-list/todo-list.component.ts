@@ -59,7 +59,7 @@ export class TodoListComponent implements OnInit {
       .open(ConfirmDialogComponent, {
         width: '300px',
         data: { message },
-        autoFocus: false,
+        restoreFocus: false,
       })
       .afterClosed();
   }
