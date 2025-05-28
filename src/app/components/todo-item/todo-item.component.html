@@ -8,7 +8,7 @@
 
   <div class="todo-title-container" (click)="editTodo()">
     <span *ngIf="titleControl && !isEditing" (click)="editTodo()">
-      {{ titleControl!.value }}
+      {{ titleControl.value }}
     </span>
 
     <mat-form-field
