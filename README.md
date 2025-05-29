@@ -1,5 +1,19 @@
 #TODO
 
+1. let's make add new todo not a simple text input, but multiline textarea as wll.
+
+src/app/components/todo-item/todo-item.component.html
+appearance="outline"
+class="todo-edit-field" >
+<textarea
+
+# TODO extra
+
+1. Modify default theming: https://v15.material.angular.dev/guide/theming
+   Setup custom colors for primary (blue shades) and accent (orange shages) colors.
+
+2. Extract common values, like gap, gap-sm, gap-lg, gap-xl, gap-xs and etc into a separate scss file which uses CSS variables (tokens), and usage in here would be: gap: var(--gap);, extract prop values like, sizes, font sizes, font family, gaps, spaces, colors.
+
 # AngularTodoApp
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.11.

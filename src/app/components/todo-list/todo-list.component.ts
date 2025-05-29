@@ -1,8 +1,17 @@
 import { Component, OnInit } from '@angular/core';
+import {
+  FormGroup,
+  FormControl,
+  FormArray,
+  Validators,
+  FormGroupDirective,
+} from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+
 import { TodoService } from '../../services/todo.service';
+import { BlurService } from '../../services/blur.service';
 import { Todo } from '../../interfaces/todo.interface';
-import { FormGroup, FormControl, FormArray } from '@angular/forms';
-import { environment } from 'src/environments/environment';
+import { ConfirmDialogComponent } from '../../components/confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-todo-list',
@@ -13,11 +22,17 @@ export class TodoListComponent implements OnInit {
   newTodoForm: FormGroup;
   todosFormGroup: FormGroup;
   todosFormArray: FormArray<FormGroup>;
+  submitting = false;
 
-  constructor(private todoService: TodoService) {
-    this.newTodoForm = new FormGroup({
-      title: new FormControl(''),
-    });
+  constructor(
+    private todoService: TodoService,
+    private dialog: MatDialog,
+    private blurService: BlurService
+  ) {
+    this.newTodoForm = this.createNewTodoForm();
+
+    this.submitting = false;
+
     this.todosFormGroup = new FormGroup({
       todos: new FormArray([]),
     });
@@ -25,10 +40,28 @@ export class TodoListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(environment.apiBaseUrl);
     this.todoService.getTodos().subscribe((todos) => {
       this.buildTodosForm(todos);
     });
+  }
+
+  private createNewTodoForm(): FormGroup {
+    return new FormGroup(
+      {
+        title: new FormControl('', Validators.required),
+      },
+      { updateOn: 'submit' }
+    );
+  }
+
+  private openConfirmDialog(message: string) {
+    return this.dialog
+      .open(ConfirmDialogComponent, {
+        width: '300px',
+        data: { message },
+        restoreFocus: false,
+      })
+      .afterClosed();
   }
 
   buildTodosForm(todos: Todo[]) {
@@ -49,7 +82,15 @@ export class TodoListComponent implements OnInit {
     );
   }
 
-  addTodo(): void {
+  addTodo(formDirective: FormGroupDirective): void {
+    if (this.newTodoForm.invalid) {
+      this.newTodoForm.markAllAsTouched();
+
+      return;
+    }
+
+    this.submitting = true;
+
     const newTodo: Omit<Todo, 'id'> = {
       title: this.newTodoForm.value.title,
       completed: false,
@@ -57,7 +98,9 @@ export class TodoListComponent implements OnInit {
 
     this.todoService.addTodo(newTodo).subscribe((savedTodo) => {
       this.addTodoToFormArray(savedTodo);
+      this.submitting = false;
       this.newTodoForm.reset();
+      formDirective.resetForm();
     });
   }
 
@@ -72,19 +115,35 @@ export class TodoListComponent implements OnInit {
   }
 
   onDeleteTodo(id: number): void {
-    this.removeTodoFromFormArray(id);
+    this.openConfirmDialog(
+      'Are you sure you want to delete this todo?'
+    ).subscribe((confirmed) => {
+      if (confirmed) {
+        this.todoService.removeTodo(id).subscribe(() => {
+          this.removeTodoFromFormArray(id);
+        });
+      }
+    });
   }
 
   deleteAllCompleted(): void {
-    const completedTodos = this.todosFormArray.controls.filter(
-      (todoFormGroup) => todoFormGroup.get('completed')?.value === true
-    );
+    this.blurService.blurActiveElement();
 
-    completedTodos.forEach((todoFormGroup) => {
-      const id = todoFormGroup.get('id')?.value;
-      if (id !== undefined) {
-        this.todoService.removeTodo(id).subscribe(() => {
-          this.removeTodoFromFormArray(id);
+    this.openConfirmDialog(
+      'Are you sure you want to delete all completed todos?'
+    ).subscribe((confirmed) => {
+      if (confirmed) {
+        const completedTodos = this.todosFormArray.controls.filter(
+          (todoFormGroup) => todoFormGroup.get('completed')?.value === true
+        );
+
+        completedTodos.forEach((todoFormGroup) => {
+          const id = todoFormGroup.get('id')?.value;
+          if (id !== undefined) {
+            this.todoService.removeTodo(id).subscribe(() => {
+              this.removeTodoFromFormArray(id);
+            });
+          }
         });
       }
     });
@@ -94,5 +153,15 @@ export class TodoListComponent implements OnInit {
     return this.todosFormArray.controls.some(
       (todoFormGroup) => todoFormGroup.get('completed')?.value === true
     );
+  }
+
+  showTitleError(): boolean {
+    const control = this.newTodoForm.get('title');
+
+    return !!control && control.invalid && control.touched;
+  }
+
+  trackById(index: number, group: FormGroup): number {
+    return group.get('id')?.value;
   }
 }
