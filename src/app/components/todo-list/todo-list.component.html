@@ -1,8 +1,14 @@
 <div class="todo-container">
   <mat-card class="todo-card">
-    <button mat-icon-button (click)="toggleTheme()" class="theme-toggle-button">
-      <mat-icon>brightness_3</mat-icon>
-    </button>
+    <div class="theme-toggle-wrapper">
+      <button
+        mat-icon-button
+        (click)="toggleTheme()"
+        class="theme-toggle-button"
+      >
+        <mat-icon>brightness_3</mat-icon>
+      </button>
+    </div>
 
     <mat-card-title>Todo List</mat-card-title>
     <mat-card-content>
