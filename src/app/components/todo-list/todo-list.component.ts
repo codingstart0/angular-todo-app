@@ -172,11 +172,11 @@ export class TodoListComponent implements OnInit {
     const body = document.body;
 
     if (this.isDarkTheme) {
-      body.classList.add('custom-dark-theme');
-      body.classList.remove('custom-light-theme');
+      body.classList.add('dark-theme');
+      body.classList.remove('light-theme');
     } else {
-      body.classList.add('custom-light-theme');
-      body.classList.remove('custom-dark-theme');
+      body.classList.add('light-theme');
+      body.classList.remove('dark-theme');
     }
   }
 }
