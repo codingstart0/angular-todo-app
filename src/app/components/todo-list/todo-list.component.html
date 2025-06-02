@@ -1,5 +1,14 @@
 <div class="todo-container">
   <mat-card class="todo-card">
+    <button
+      mat-mini-fab
+      color="primary"
+      class="theme-toggle-button"
+      (click)="toggleTheme()"
+    >
+      <mat-icon>brightness_2 </mat-icon>
+    </button>
+
     <mat-card-title>Todo List</mat-card-title>
     <mat-card-content>
       <form

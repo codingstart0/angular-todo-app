@@ -164,4 +164,19 @@ export class TodoListComponent implements OnInit {
   trackById(index: number, group: FormGroup): number {
     return group.get('id')?.value;
   }
+
+  isDarkTheme = false;
+
+  toggleTheme(): void {
+    this.isDarkTheme = !this.isDarkTheme;
+    const body = document.body;
+
+    if (this.isDarkTheme) {
+      body.classList.add('custom-dark-theme');
+      body.classList.remove('custom-light-theme');
+    } else {
+      body.classList.add('custom-light-theme');
+      body.classList.remove('custom-dark-theme');
+    }
+  }
 }
