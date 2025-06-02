@@ -15,6 +15,7 @@ export class AppComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.renderer.addClass(this.document.body, 'mat-app-background');
     this.renderer.addClass(this.document.body, 'light-theme');
   }
 }
