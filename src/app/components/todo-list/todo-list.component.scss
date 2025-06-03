@@ -1,3 +1,5 @@
+@use '@angular/material' as mat;
+
 .todo-container {
   display: flex;
   justify-content: center;
@@ -8,7 +10,14 @@
   width: 100%;
   max-width: 600px;
   padding: 1.5rem;
-  background: white;
+
+  background-color: mat.get-color-from-palette(mat.$grey-palette, 50);
+  color: mat.get-color-from-palette(mat.$grey-palette, 900);
+
+  .dark-theme & {
+    background-color: mat.get-color-from-palette(mat.$grey-palette, 900);
+    color: mat.get-color-from-palette(mat.$grey-palette, 50);
+  }
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
