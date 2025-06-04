@@ -30,4 +30,12 @@ $custom-dark-theme: mat.define-dark-theme(
 
 .dark-theme {
   @include mat.all-component-colors($custom-dark-theme);
+
+  --todo-title-color: #{mat.get-color-from-palette($accent-palette)};
+  --todo-title-shadow: #{mat.get-color-from-palette($warn-palette)};
+}
+
+.light-theme {
+  --todo-title-color: #{mat.get-color-from-palette($primary-palette)};
+  --todo-title-shadow: #{mat.get-color-from-palette($warn-palette)};
 }

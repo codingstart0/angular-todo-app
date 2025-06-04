@@ -1,5 +1,3 @@
-// @use '@angular/material' as mat;
-
 .todo-container {
   display: flex;
   justify-content: center;
@@ -10,22 +8,15 @@
   width: 100%;
   max-width: 600px;
   padding: 1.5rem;
-
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-mat-card-title {
+.todo-card-title {
+  color: var(--todo-title-color);
   text-align: center;
   font-size: 2rem;
   font-weight: 700;
   margin-bottom: 1.5rem;
-
-  background: linear-gradient(90deg, #673ab7, #ffc107);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  color: transparent;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+  text-shadow: 1px 2px 20px var(--todo-title-shadow);
 }
 
 .todo-form {
