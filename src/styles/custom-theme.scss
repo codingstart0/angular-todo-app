@@ -27,15 +27,19 @@ $custom-dark-theme: mat.define-dark-theme(
 );
 
 @include mat.all-component-themes($custom-light-theme);
+$foreground-palette: map-get($custom-dark-theme, foreground);
 
 .dark-theme {
   @include mat.all-component-colors($custom-dark-theme);
 
   --todo-title-color: #{mat.get-color-from-palette($accent-palette)};
-  --todo-title-shadow: #{mat.get-color-from-palette($warn-palette)};
+
+  --todo-item-hover-bg: #{rgba(
+      mat.get-color-from-palette($foreground-palette, base),
+      0.06
+    )};
 }
 
 .light-theme {
   --todo-title-color: #{mat.get-color-from-palette($primary-palette)};
-  --todo-title-shadow: #{mat.get-color-from-palette($warn-palette)};
 }

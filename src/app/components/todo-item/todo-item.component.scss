@@ -1,3 +1,5 @@
+@use '@angular/material' as mat;
+
 .todo-title {
   flex: 1;
   cursor: pointer;
@@ -5,12 +7,19 @@
 }
 
 .todo-item {
+  @include mat.elevation-transition();
+
+  &:hover {
+    @include mat.elevation(3);
+    background-color: var(--todo-item-hover-bg);
+  }
+
   display: flex;
   align-items: center;
   gap: 1rem;
   padding: 0.5rem 0;
   border-radius: 8px;
-  border: 1px solid #ddd;
+  border: 1px solid var(--todo-item-border, #ddd);
 
   .todo-checkbox {
     flex-shrink: 0;
