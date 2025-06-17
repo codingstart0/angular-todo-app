@@ -1,4 +1,5 @@
-import { Injectable } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { Injectable, Inject } from '@angular/core';
 
 const THEME_KEY = 'theme-preference';
 
@@ -8,7 +9,7 @@ const THEME_KEY = 'theme-preference';
 export class ThemeService {
   private darkTheme = false;
 
-  constructor() {
+  constructor(@Inject(DOCUMENT) private document: Document) {
     const savedTheme = localStorage.getItem(THEME_KEY);
     this.darkTheme = savedTheme === 'dark';
     this.applyTheme();
@@ -26,7 +27,7 @@ export class ThemeService {
 
   private applyTheme(): void {
     const themeClass = this.darkTheme ? 'dark-theme' : 'light-theme';
-    document.body.classList.remove('light-theme', 'dark-theme');
-    document.body.classList.add(themeClass);
+    this.document.body.classList.remove('light-theme', 'dark-theme');
+    this.document.body.classList.add(themeClass);
   }
 }
