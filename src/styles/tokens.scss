@@ -12,4 +12,11 @@
   --font-size-xl: 1.5rem;
 
   --font-family-base: 'Roboto', sans-serif;
+
+  --border-width: 1px;
+  --border-style: solid;
+  --border-color: var(--todo-item-border, #ddd);
+  --border-radius-sm: 4px;
+  --border-radius: 8px;
+  --border-radius-lg: 12px;
 }
