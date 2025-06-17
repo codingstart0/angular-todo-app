@@ -27,19 +27,30 @@ $custom-dark-theme: mat.define-dark-theme(
 );
 
 @include mat.all-component-themes($custom-light-theme);
-$foreground-palette: map-get($custom-dark-theme, foreground);
+
+$foreground-light-palette: map-get($custom-light-theme, foreground);
+$foreground-dark-palette: map-get($custom-dark-theme, foreground);
+
+.light-theme {
+  --todo-title-color: #{mat.get-color-from-palette($primary-palette)};
+  --todo-item-border: #{mat.get-color-from-palette(mat.$grey-palette, 300)};
+  --border-color: var(--todo-item-border);
+
+  --todo-item-hover-bg: #{rgba(
+      mat.get-color-from-palette($foreground-light-palette, base),
+      0.03
+    )};
+}
 
 .dark-theme {
   @include mat.all-component-colors($custom-dark-theme);
 
   --todo-title-color: #{mat.get-color-from-palette($accent-palette)};
+  --todo-item-border: #{mat.get-color-from-palette(mat.$grey-palette, 600)};
+  --border-color: var(--todo-item-border);
 
   --todo-item-hover-bg: #{rgba(
-      mat.get-color-from-palette($foreground-palette, base),
+      mat.get-color-from-palette($foreground-dark-palette, base),
       0.06
     )};
-}
-
-.light-theme {
-  --todo-title-color: #{mat.get-color-from-palette($primary-palette)};
 }
