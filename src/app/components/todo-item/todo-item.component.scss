@@ -9,11 +9,6 @@
 .todo-item {
   @include mat.elevation-transition();
 
-  &:hover {
-    @include mat.elevation(3);
-    background-color: var(--todo-item-hover-bg);
-  }
-
   display: flex;
   align-items: center;
   gap: 1rem;
@@ -70,4 +65,14 @@
   .delete-btn {
     flex-shrink: 0;
   }
+}
+
+::ng-deep .light-theme .todo-item:hover {
+  @include mat.elevation(3);
+  background-color: var(--todo-item-hover-bg);
+}
+
+::ng-deep .dark-theme .todo-item:hover {
+  @include mat.elevation(6);
+  background-color: var(--todo-item-hover-bg);
 }
