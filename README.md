@@ -11,6 +11,20 @@ appearance="outline"
 class="todo-edit-field" >
 <textarea
 
+1.1. Remove the duplication call editTodo() on click from <span>.
+
+src/app/components/todo-item/todo-item.component.html
+
+ <div class="todo-title-container" (click)="editTodo()">
+    <span *ngIf="titleControl && !isEditing" (click)="editTodo()">
+      {{ titleControl.value }}
+    </span>
+
+1.2. Consider adding aria-labels for the button if icons are the only visible label:
+
+src/app/components/todo-item/todo-item.component.html
+<button mat-icon-button aria-label="Delete todo" ...>
+
 # AngularTodoApp
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.11.
