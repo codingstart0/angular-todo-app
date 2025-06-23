@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { ThemeService } from './services/theme.service';
 
 @Component({
   selector: 'app-root',
@@ -8,10 +7,4 @@ import { ThemeService } from './services/theme.service';
 })
 export class AppComponent {
   title = 'angular-todo-app';
-
-  constructor(private themeService: ThemeService) {}
-
-  toggleTheme(): void {
-    this.themeService.toggleTheme();
-  }
 }
