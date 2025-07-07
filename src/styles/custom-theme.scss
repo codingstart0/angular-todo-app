@@ -2,6 +2,11 @@
 
 @include mat.core();
 
+:root {
+  --primary-color: #fff;
+  --font-size: 14px;
+}
+
 $primary-palette: mat.define-palette(mat.$blue-palette, 600, 300, 800);
 $accent-palette: mat.define-palette(mat.$orange-palette, A200, A100, A400);
 $warn-palette: mat.define-palette(mat.$red-palette);
@@ -31,7 +36,7 @@ $custom-dark-theme: mat.define-dark-theme(
 $foreground-light-palette: map-get($custom-light-theme, foreground);
 $foreground-dark-palette: map-get($custom-dark-theme, foreground);
 
-.light-theme {
+:root {
   --todo-title-color: #{mat.get-color-from-palette($primary-palette)};
   --todo-item-border: #{mat.get-color-from-palette(mat.$grey-palette, 300)};
   --border-color: var(--todo-item-border);

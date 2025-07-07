@@ -67,7 +67,7 @@
   }
 }
 
-::ng-deep .light-theme .todo-item:hover {
+::ng-deep .todo-item:hover {
   @include mat.elevation(3);
   background-color: var(--todo-item-hover-bg);
 }

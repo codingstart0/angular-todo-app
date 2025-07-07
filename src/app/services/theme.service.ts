@@ -26,8 +26,10 @@ export class ThemeService {
   }
 
   private applyTheme(): void {
-    const themeClass = this.darkTheme ? 'dark-theme' : 'light-theme';
-    this.document.body.classList.remove('light-theme', 'dark-theme');
-    this.document.body.classList.add(themeClass);
+    if (this.darkTheme) {
+      this.document.body.classList.add('dark-theme');
+    } else {
+      this.document.body.classList.remove('dark-theme');
+    }
   }
 }
