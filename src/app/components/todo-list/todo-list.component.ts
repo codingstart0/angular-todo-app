@@ -170,4 +170,8 @@ export class TodoListComponent implements OnInit {
   onToggleThemeClick(): void {
     this.themeService.toggleTheme();
   }
+
+  get isDarkTheme(): boolean {
+    return this.themeService.isDarkTheme();
+  }
 }
