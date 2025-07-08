@@ -12,7 +12,6 @@ import { TodoService } from '../../services/todo.service';
 import { BlurService } from '../../services/blur.service';
 import { Todo } from '../../interfaces/todo.interface';
 import { ConfirmDialogComponent } from '../../components/confirm-dialog/confirm-dialog.component';
-import { ThemeService } from '../../services/theme.service';
 
 @Component({
   selector: 'app-todo-list',
@@ -28,8 +27,7 @@ export class TodoListComponent implements OnInit {
   constructor(
     private todoService: TodoService,
     private dialog: MatDialog,
-    private blurService: BlurService,
-    private themeService: ThemeService
+    private blurService: BlurService
   ) {
     this.newTodoForm = this.createNewTodoForm();
 
@@ -165,13 +163,5 @@ export class TodoListComponent implements OnInit {
 
   trackById(index: number, group: FormGroup): number {
     return group.get('id')?.value;
-  }
-
-  onToggleThemeClick(): void {
-    this.themeService.toggleTheme();
-  }
-
-  get isDarkTheme(): boolean {
-    return this.themeService.isDarkTheme();
   }
 }
