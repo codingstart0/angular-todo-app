@@ -1,14 +1,6 @@
 <div class="todo-container">
   <mat-card class="todo-card">
-    <div class="theme-toggle-wrapper">
-      <button
-        mat-icon-button
-        (click)="onToggleThemeClick()"
-        class="theme-toggle-button"
-      >
-        <mat-icon>{{ isDarkTheme ? 'light_mode' : 'brightness_3' }}</mat-icon>
-      </button>
-    </div>
+    <app-theme-switch></app-theme-switch>
 
     <mat-card-title class="todo-card-title">Todo List</mat-card-title>
     <mat-card-content>
