@@ -9,6 +9,16 @@ appearance="outline"
 class="todo-edit-field" >
 <textarea
 
+3. Fix Todo Editing – Cancel on ESC and Prevent Empty Updates.
+
+Pressing ESC during todo edit should cancel the edit.
+The original todo text should be immediately restored in the UI without requiring a page refresh.
+
+If the user clears the todo text and confirms the edit (e.g. by pressing Enter or blurring the input): The app must not allow saving an empty string.
+Optionally, show a validation message or silently discard the change.
+
+Trim unnecessary leading/trailing whitespace during editing.
+
 # AngularTodoApp
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.11.
