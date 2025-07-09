@@ -2,28 +2,22 @@
 
 1. Extract common values, like gap, gap-sm, gap-lg, gap-xl, gap-xs and etc into a separate scss file which uses CSS variables (tokens), and usage in here would be: gap: var(--gap);, extract prop values like, sizes, font sizes, font family, gaps, spaces, colors.
 
-# TODO extra
-
-1. Let's make add new todo not a simple text input, but multiline textarea as wll.
+2. Let's make add new todo not a simple text input, but multiline textarea as wll.
 
 src/app/components/todo-item/todo-item.component.html
 appearance="outline"
 class="todo-edit-field" >
 <textarea
 
-1.1. Remove the duplication call editTodo() on click from <span>.
+3. Fix Todo Editing – Cancel on ESC and Prevent Empty Updates.
 
-src/app/components/todo-item/todo-item.component.html
+Pressing ESC during todo edit should cancel the edit.
+The original todo text should be immediately restored in the UI without requiring a page refresh.
 
- <div class="todo-title-container" (click)="editTodo()">
-    <span *ngIf="titleControl && !isEditing" (click)="editTodo()">
-      {{ titleControl.value }}
-    </span>
+If the user clears the todo text and confirms the edit (e.g. by pressing Enter or blurring the input): The app must not allow saving an empty string.
+Optionally, show a validation message or silently discard the change.
 
-1.2. Consider adding aria-labels for the button if icons are the only visible label:
-
-src/app/components/todo-item/todo-item.component.html
-<button mat-icon-button aria-label="Delete todo" ...>
+Trim unnecessary leading/trailing whitespace during editing.
 
 # AngularTodoApp
 

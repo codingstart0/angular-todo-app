@@ -17,6 +17,7 @@ import { AppComponent } from './app.component';
 import { TodoListComponent } from './components/todo-list/todo-list.component';
 import { TodoItemComponent } from './components/todo-item/todo-item.component';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
+import { ThemeSwitchComponent } from './components/theme-switch/theme-switch.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dial
     TodoListComponent,
     TodoItemComponent,
     ConfirmDialogComponent,
+    ThemeSwitchComponent,
   ],
   imports: [
     BrowserModule,

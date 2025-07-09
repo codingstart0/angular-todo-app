@@ -31,7 +31,10 @@ $custom-dark-theme: mat.define-dark-theme(
 $foreground-light-palette: map-get($custom-light-theme, foreground);
 $foreground-dark-palette: map-get($custom-dark-theme, foreground);
 
-.light-theme {
+:root {
+  --primary-color: #fff;
+  --font-size: 14px;
+
   --todo-title-color: #{mat.get-color-from-palette($primary-palette)};
   --todo-item-border: #{mat.get-color-from-palette(mat.$grey-palette, 300)};
   --border-color: var(--todo-item-border);
@@ -45,7 +48,6 @@ $foreground-dark-palette: map-get($custom-dark-theme, foreground);
 .dark-theme {
   @include mat.all-component-colors($custom-dark-theme);
 
-  --todo-title-color: #{mat.get-color-from-palette($accent-palette)};
   --todo-item-border: #{mat.get-color-from-palette(mat.$grey-palette, 600)};
   --border-color: var(--todo-item-border);
 

@@ -59,6 +59,11 @@
     }
   }
 
+  //Maybe this is not needed
+  ::ng-deep .mat-form-field-wrapper {
+    padding-bottom: 0;
+  }
+
   ::ng-deep .mat-form-field-subscript-wrapper {
     display: none;
   }
@@ -66,4 +71,14 @@
   .delete-btn {
     flex-shrink: 0;
   }
+}
+
+::ng-deep .todo-item:hover {
+  @include mat.elevation(3);
+  background-color: var(--todo-item-hover-bg);
+}
+
+::ng-deep .dark-theme .todo-item:hover {
+  @include mat.elevation(6);
+  background-color: var(--todo-item-hover-bg);
 }
