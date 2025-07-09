@@ -18,7 +18,7 @@
   color: var(--todo-title-color);
   text-align: center;
   font-size: var(--font-size-xxl);
-  font-weight: 700;
+  font-weight: var(--font-weight-bold);
   margin-bottom: var(--gap-lg);
   font-family: var(--font-family-base);
 }

@@ -33,7 +33,7 @@ $foreground-dark-palette: map-get($custom-dark-theme, foreground);
 
 :root {
   --primary-color: #fff;
-  --font-size: 14px;
+  font-size: var(--font-size);
 
   --todo-title-color: #{mat.get-color-from-palette($primary-palette)};
   --todo-item-border: #{mat.get-color-from-palette(mat.$grey-palette, 300)};

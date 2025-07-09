@@ -1,9 +1,5 @@
 :root {
-  --gap-xs: 0.25rem;
-  --gap-sm: 0.5rem;
-  --gap: 1rem;
-  --gap-lg: 1.5rem;
-  --gap-xl: 2rem;
+  --font-family-base: 'Roboto', sans-serif;
 
   --font-size-xs: 0.75rem;
   --font-size-sm: 0.875rem;
@@ -12,7 +8,18 @@
   --font-size-xl: 1.5rem;
   --font-size-xxl: 2rem;
 
-  --font-family-base: 'Roboto', sans-serif;
+  --font-weight-light: 300;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-black: 900;
+
+  --gap-xs: 0.25rem;
+  --gap-sm: 0.5rem;
+  --gap: 1rem;
+  --gap-lg: 1.5rem;
+  --gap-xl: 2rem;
 
   --border-width: 1px;
   --border-style: solid;
