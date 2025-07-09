@@ -1,18 +1,23 @@
 #TODO
 
-1. let's make add new todo not a simple text input, but multiline textarea as wll.
+1. Extract common values, like gap, gap-sm, gap-lg, gap-xl, gap-xs and etc into a separate scss file which uses CSS variables (tokens), and usage in here would be: gap: var(--gap);, extract prop values like, sizes, font sizes, font family, gaps, spaces, colors.
+
+2. Let's make add new todo not a simple text input, but multiline textarea as wll.
 
 src/app/components/todo-item/todo-item.component.html
 appearance="outline"
 class="todo-edit-field" >
 <textarea
 
-# TODO extra
+3. Fix Todo Editing – Cancel on ESC and Prevent Empty Updates.
 
-1. Modify default theming: https://v15.material.angular.dev/guide/theming
-   Setup custom colors for primary (blue shades) and accent (orange shages) colors.
+Pressing ESC during todo edit should cancel the edit.
+The original todo text should be immediately restored in the UI without requiring a page refresh.
 
-2. Extract common values, like gap, gap-sm, gap-lg, gap-xl, gap-xs and etc into a separate scss file which uses CSS variables (tokens), and usage in here would be: gap: var(--gap);, extract prop values like, sizes, font sizes, font family, gaps, spaces, colors.
+If the user clears the todo text and confirms the edit (e.g. by pressing Enter or blurring the input): The app must not allow saving an empty string.
+Optionally, show a validation message or silently discard the change.
+
+Trim unnecessary leading/trailing whitespace during editing.
 
 # AngularTodoApp
 
