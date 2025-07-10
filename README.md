@@ -1,15 +1,13 @@
 #TODO
 
-1. Extract common values, like gap, gap-sm, gap-lg, gap-xl, gap-xs and etc into a separate scss file which uses CSS variables (tokens), and usage in here would be: gap: var(--gap);, extract prop values like, sizes, font sizes, font family, gaps, spaces, colors.
-
-2. Let's make add new todo not a simple text input, but multiline textarea as wll.
+1. Let's make add new todo not a simple text input, but multiline textarea as wll.
 
 src/app/components/todo-item/todo-item.component.html
 appearance="outline"
 class="todo-edit-field" >
 <textarea
 
-3. Fix Todo Editing – Cancel on ESC and Prevent Empty Updates.
+2. Fix Todo Editing – Cancel on ESC and Prevent Empty Updates.
 
 Pressing ESC during todo edit should cancel the edit.
 The original todo text should be immediately restored in the UI without requiring a page refresh.

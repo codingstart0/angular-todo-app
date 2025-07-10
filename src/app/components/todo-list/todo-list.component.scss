@@ -3,13 +3,13 @@
 .todo-container {
   display: flex;
   justify-content: center;
-  padding: 2rem;
+  padding: var(--gap-xl);
 }
 
 .todo-card {
   width: 100%;
   max-width: 600px;
-  padding: 1.5rem;
+  padding: var(--gap-lg);
 
   @include mat.elevation(8);
 }
@@ -17,22 +17,23 @@
 .todo-card-title {
   color: var(--todo-title-color);
   text-align: center;
-  font-size: 2rem;
-  font-weight: 700;
-  margin-bottom: 1.5rem;
+  font-size: var(--font-size-xxl);
+  font-weight: var(--font-weight-bold);
+  margin-bottom: var(--gap-lg);
+  font-family: var(--font-family-base);
 }
 
 .todo-form {
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  margin-bottom: 2rem;
+  margin-bottom: var(--gap-xl);
 }
 
 .input-button-wrapper {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: var(--gap-sm);
 }
 
 .full-width {
@@ -43,8 +44,8 @@
 .todo-list {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
-  margin-bottom: 1rem;
+  gap: var(--gap-sm);
+  margin-bottom: var(--gap);
 }
 
 @media (max-width: 600px) {

@@ -9,12 +9,17 @@
 .todo-item {
   @include mat.elevation-transition();
 
+  &:hover {
+    @include mat.elevation(3);
+    background-color: var(--todo-item-hover-bg);
+  }
+
   display: flex;
   align-items: center;
-  gap: 1rem;
-  padding: 0.5rem 0;
-  border-radius: 8px;
-  border: 1px solid var(--todo-item-border, #ddd);
+  gap: var(--gap);
+  padding: var(--gap-sm) var(--gap-sm);
+  border: var(--border-width) var(--border-style) var(--border-color);
+  border-radius: var(--border-radius);
 
   .todo-checkbox {
     flex-shrink: 0;
@@ -29,7 +34,7 @@
 
   span {
     display: block;
-    padding: 0.5rem 0;
+    padding: var(--gap-sm) 0;
     white-space: nowrap;
     overflow: hidden;
     overflow-wrap: break-word;
@@ -54,6 +59,7 @@
     }
   }
 
+  //Maybe this is not needed
   ::ng-deep .mat-form-field-wrapper {
     padding-bottom: 0;
   }
